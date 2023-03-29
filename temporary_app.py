@@ -17,6 +17,11 @@ def health_check():
     """
     return Response("", status=200)
 
+@app.route('/robots.txt')
+def robots_txt():
+    robots = "User-agent: *\nDisallow: /"
+    return Response(robots, mimetype='text/plain', status=200)
+
 @app.route("/")
 def all():
     """
