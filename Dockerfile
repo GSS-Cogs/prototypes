@@ -36,10 +36,6 @@ WORKDIR /
 # Application 2: data-catalogue server
 # ------------------------------------
 COPY ./data-catalogue ./npm/data-catalogue
-# WORKDIR /npm/data-catalogue
-# RUN npm install
-# RUN npm next build
-# WORKDIR /
 
 # -------------------
 # Nginx configuration
