@@ -8,15 +8,6 @@ from flask import Response
 
 app = Flask(__name__)
 
-@app.route("/_healthcheck")
-def health_check():
-    """
-    Add a simple healthcheck to keep k8s happy, else the
-    app will run be perpetually reported as being in a state
-    of 0/1 pods ready.
-    """
-    return Response("", status=200)
-
 @app.route('/robots.txt')
 def robots_txt():
     robots = "User-agent: *\nDisallow: /"
@@ -27,7 +18,7 @@ def all():
     """
     Catch everything that's not a healthcheck
     """
-    return "Hello world! I will be a prototype"
+    return "Hello world"
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True, port=3000)
+    app.run(debug=True, port=5000)
