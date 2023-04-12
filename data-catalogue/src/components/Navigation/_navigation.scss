@@ -90,6 +90,35 @@ $after-button-padding-left: govuk-spacing(4);
   }
 }
 
+.gem-c-layout-super-navigation-header,
+.gem-c-layout-super-navigation-header__container-inner {
+    border-bottom-width: 10px;
+    border-bottom-style: solid;
+}
+
+.gem-c-layout-super-navigation-header__container-inner {
+    margin-bottom: -10px;
+}
+
+// Main coloured borders:
+.gem-c-layout-super-navigation-header.root-header {
+    border-bottom-color: #1D70B8;
+}
+
+.gem-c-layout-super-navigation-header.non-root-header {
+    // border-bottom-color: #F3F2F1;
+    border-bottom-color: #FFFFFF;
+}
+
+// Background blended borders:
+.gem-c-layout-super-navigation-header__container-inner.root-header {
+    border-bottom-color: #FFDD00;
+}
+
+.gem-c-layout-super-navigation-header__container-inner.non-root-header {
+    border-bottom-color: #1D70B8;
+}
+
 .gem-c-layout-super-navigation-header__container {
   position: relative;
 }

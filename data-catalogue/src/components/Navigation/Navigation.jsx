@@ -1,8 +1,13 @@
+import { useRouter } from "next/router";
+
 export default function Navigation(props) {
+  const router = useRouter();
+  const className = router.pathname === "/" ? "root-header" : "non-root-header";
+
   return (
     <header
       role="banner"
-      className="gem-c-layout-super-navigation-header"
+      className={`gem-c-layout-super-navigation-header ${className}`}
       data-module="gem-track-click ga4-event-tracker ga4-link-tracker"
       data-track-links-only=""
       data-ga4-expandable=""
@@ -11,7 +16,9 @@ export default function Navigation(props) {
       data-ga4-link-tracker-module-started="true"
     >
       <div className="gem-c-layout-super-navigation-header__container govuk-clearfix">
-        <div className="govuk-width-container">
+        <div
+          className={`gem-c-layout-super-navigation-header__container-inner govuk-width-container  ${className}`}
+        >
           <div className="gem-c-layout-super-navigation-header__header-logo">
             <a
               className="govuk-header__link govuk-header__link--homepage"
