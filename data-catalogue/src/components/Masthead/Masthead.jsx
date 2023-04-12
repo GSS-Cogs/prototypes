@@ -4,6 +4,9 @@ export default function Masthead(props) {
       <div className="govuk-width-container">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-two-thirds-from-desktop">
+            <h1 className="govuk-caption-m app-masthead__caption">
+              {props.caption}
+            </h1>
             <h1 className="govuk-heading-xl app-masthead__title">
               {props.heading}
             </h1>

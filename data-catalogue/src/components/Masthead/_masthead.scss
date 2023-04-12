@@ -6,6 +6,11 @@
     background-color: var(--masthead-colour, govuk-colour("blue"));
 }
 
+.app-masthead__caption {
+    color: govuk-colour("white");
+    margin-bottom: 0;
+}
+
 .app-masthead__title {
     color: govuk-colour("white");
     @include govuk-responsive-margin(6, "bottom");
