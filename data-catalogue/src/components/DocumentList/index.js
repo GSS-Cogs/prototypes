@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import useDataList from "@/hooks/useDataList";
 
 import { MdRssFeed } from "react-icons/md";
