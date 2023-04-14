@@ -3,8 +3,11 @@ import Search from "@/components/Search";
 import DocumentList from "@/components/DocumentList";
 
 import datasets from "../data/rawData.json";
+import useSortData from "@/hooks/useSortData";
 
 export default function DatasetList() {
+  const { sortedData } = useSortData(datasets.results.bindings, "date");
+
   return (
     <div className="govuk-width-container">
       <Breadcrumbs items={[{ text: "Home", href: "/" }]} />
@@ -24,7 +27,7 @@ export default function DatasetList() {
         {/* <Search /> */}
         <div className="govuk-grid-row">
           <div className="govuk-width-container">
-            <DocumentList items={datasets.results.bindings} />
+            <DocumentList items={sortedData} />
           </div>
           {/* <div className="govuk-grid-column-one-third">
             <h2 className="govuk-heading-m">Refine Results</h2>
