@@ -1,4 +1,8 @@
+import React, { useCallback, useEffect, useState } from "react";
+import useDataList from "@/hooks/useDataList";
+
 import { MdRssFeed } from "react-icons/md";
+import Pagination from "../Pagination";
 
 function DocumentListItem(props) {
   return (
@@ -54,12 +58,22 @@ function formatDate(date) {
 }
 
 export default function DocumentList(props) {
+  const [page, setPage] = useState(1);
+  const { slice, range, totalResults } = useDataList(props.items, page, 20);
+
+  const changePage = (index) => {
+    const newPageIndex = page + index;
+    if (newPageIndex > 0 && newPageIndex <= range.length) {
+      setPage(newPageIndex);
+    }
+  };
+
   return (
     <>
       <div className="gem-c-document-header">
         <h3 className="gem-c-document-header__results">
           {/* Showing 1 to {datasets.length < 10 ? datasets.length : 10} of{" "} */}
-          {props.items.length} results
+          {totalResults} results
         </h3>
         <div
           style={{
@@ -73,10 +87,15 @@ export default function DocumentList(props) {
         </div>
       </div>
       <ul className="gem-c-document-list">
-        {props.items.map((item) => {
+        {slice.map((item) => {
           return <DocumentListItem {...item} />;
         })}
       </ul>
+      <Pagination
+        totalPages={range.length}
+        page={page}
+        changePage={changePage}
+      />
     </>
   );
 }
