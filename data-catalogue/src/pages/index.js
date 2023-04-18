@@ -18,9 +18,6 @@ export default function Home() {
       <div className="govuk-width-container">
         <main className="govuk-main-wrapper" id="main-content" role="main">
           {/* <TopicSection /> */}
-          <h1 className="title">
-            Goto <Link href="/dataset-list">dataset list</Link>
-          </h1>
         </main>
       </div>
     </>

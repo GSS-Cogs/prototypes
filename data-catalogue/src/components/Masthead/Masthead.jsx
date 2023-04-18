@@ -1,3 +1,5 @@
+import Button from "../Button";
+
 export default function Masthead(props) {
   return (
     <div className="app-masthead" style={{ "--masthead-colour": props.colour }}>
@@ -14,6 +16,7 @@ export default function Masthead(props) {
             {props.children}
           </div>
         </div>
+        <Button text="Explore data" href="/dataset-list" />
       </div>
     </div>
   );

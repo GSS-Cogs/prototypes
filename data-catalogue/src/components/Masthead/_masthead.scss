@@ -32,3 +32,18 @@
         }
     }
 }
+
+@media screen and (max-width: 801px) {
+    .app-masthead__start {
+      @include govuk-responsive-margin(9, 'bottom');
+    }
+  }
+  
+  .app-masthead__start,
+  .app-masthead__start:link,
+  .app-masthead__start:visited,
+  .app-masthead__start:active,
+  .app-masthead__start:hover {
+    color: govuk-colour('blue');
+    margin-top: govuk-spacing(6);
+  }
