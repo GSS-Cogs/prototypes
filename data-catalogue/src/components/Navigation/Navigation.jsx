@@ -50,6 +50,7 @@ export default function Navigation(props) {
                 </svg>
                 <span className="govuk-header__logotype-text">GOV.UK</span>
               </span>
+              <span className="govuk-header__product-name">Find data</span>
             </a>
           </div>
         </div>
