@@ -21,9 +21,9 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y nodejs yarn && \
     rm -rf /var/lib/apt/lists/* && \
-    yarn add sass && \
-    yarn add next
+    yarn add sass
 WORKDIR /
+ENV PATH="/npm/node_modules/.bin:${PATH}"
 
 # ---------------------------
 # Application 1: sanity-check
