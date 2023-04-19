@@ -16,7 +16,7 @@ def robots_txt():
 @app.route("/")
 def all():
     """
-    Catch everything that's not a healthcheck
+    Catch everything else
     """
     return "Hello world"
 

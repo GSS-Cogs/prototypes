@@ -12,7 +12,7 @@ RUN apt-get update && \
 # Install Node.js, Yarn and next
 # NOTE - installing into /npm as there's issues installing
 # into root. Npm/Yarn apps will need to go in there as well
-WORKDIR /npm
+WORKDIR /
 RUN apt-get update && \
     apt-get install -y curl gnupg && \
     curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
@@ -21,7 +21,7 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y nodejs yarn && \
     rm -rf /var/lib/apt/lists/*
-RUN npm i next@latest
+#RUN npm i next@latest
 WORKDIR /
 
 # ---------------------------
@@ -35,7 +35,7 @@ WORKDIR /
 # ------------------------------------
 # Application 2: data-catalogue server
 # ------------------------------------
-COPY ./data-catalogue ./npm/data-catalogue
+COPY ./data-catalogue ./data-catalogue
 
 # -------------------
 # Nginx configuration
@@ -51,6 +51,6 @@ EXPOSE 80
 
 # Add your app start command as per the examples below
 CMD \
-    cd /npm/data-catalogue && npm run dev & \
+    cd /data-catalogue && yarn dev & \
     cd /sanity-check && python3 app.py & \
     nginx -g "daemon off;"

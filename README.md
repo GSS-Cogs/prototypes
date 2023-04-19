@@ -27,12 +27,6 @@ The intention of the above described sandbox behaviour is to enable temporary de
 ## Adding a new application
 
 - Create your prototype in its own directory (such as `./data-catalogue` or `./sanity-check`)
-- You **must** include a `./robots.txt` endpoint to stop the prototype getting indexed. The response from this endpoint should be:
-```
-User-agent: *
-Disallow: /
-```
-with a status code `200` and with a mimetype of `mimetype='text/plain'`.
 - Copy your application in to the image via the dockerfile. There is a python and a yarn example included as "Application 1" and "Application 2" respectivly.
 - Update the `CMD` instruction with however your app starts, just follow the existing patterns.
 - Add a new location block to `nginx.conf` as per the following. The **only** thing that should change is the `<PATH>` and the `<PORT>`.
@@ -65,4 +59,4 @@ When you need to stop the container then:
 
 ## Other dependencies
 
-We can probably run using dependencies beyond python3 and Yarn/NPM but you'll need to add them to the [Dockerfile](./Dockerfile) and make sure it (and the existing prototypes) works.
+We can probably run using dependencies beyond python3 and Yarn/NPM but you'll need to add them to the [Dockerfile](./Dockerfile) and make sure it (and the existing prototypes) work.
