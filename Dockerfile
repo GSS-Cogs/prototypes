@@ -21,8 +21,8 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y nodejs yarn && \
     rm -rf /var/lib/apt/lists/* && \
-    yarn install && \
-    yarn add next
+    npm install && \
+    yarn install
 WORKDIR /
 ENV PATH="/npm/node_modules/.bin:${PATH}"
 
