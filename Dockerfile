@@ -21,9 +21,9 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y nodejs yarn && \
     rm -rf /var/lib/apt/lists/* && \
-    yarn add sass && \
-    yarn add next
+    yarn install
 WORKDIR /
+ENV PATH="/npm/node_modules/.bin:${PATH}"
 
 # ---------------------------
 # Application 1: sanity-check
@@ -52,6 +52,6 @@ EXPOSE 80
 
 # Add your app start command as per the examples below
 CMD \
-    cd /npm/data-catalogue && yarn run next dev & \
+    cd /npm/data-catalogue && yarn dev & \
     cd /sanity-check && python3 app.py & \
     nginx -g "daemon off;"
