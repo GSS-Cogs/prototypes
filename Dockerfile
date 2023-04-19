@@ -20,9 +20,7 @@ RUN apt-get update && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update && \
     apt-get install -y nodejs yarn && \
-    rm -rf /var/lib/apt/lists/* && \
-    npm install && \
-    yarn install
+    rm -rf /var/lib/apt/lists/*
 WORKDIR /
 ENV PATH="/npm/node_modules/.bin:${PATH}"
 
@@ -38,6 +36,8 @@ WORKDIR /
 # Application 2: data-catalogue server
 # ------------------------------------
 COPY ./data-catalogue ./npm/data-catalogue
+WORKDIR /npm/data-catalogue
+RUN yarn install
 
 # -------------------
 # Nginx configuration
