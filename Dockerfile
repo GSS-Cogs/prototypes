@@ -21,7 +21,8 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -y nodejs yarn && \
     rm -rf /var/lib/apt/lists/* && \
-    yarn add sass
+    yarn add sass && \
+    yarn add next
 WORKDIR /
 
 # ---------------------------
