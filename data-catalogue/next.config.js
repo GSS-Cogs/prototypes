@@ -7,6 +7,7 @@ const nextConfig = {
     fiber: false,
     includePaths: [path.join(__dirname, "styles")],
   },
+  basePath: '/data-catalogue',
 };
 
 module.exports = nextConfig;
