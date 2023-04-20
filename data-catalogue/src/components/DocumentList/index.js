@@ -24,7 +24,7 @@ function DocumentListItem(props) {
           style={{ textAlign: "right" }}
         >
           <li className="gem-c-document-list__tag-outer">
-            <strong class="gem-c-document-list__tag-inner govuk-tag--blue">
+            <strong className="gem-c-document-list__tag-inner govuk-tag--blue">
               {props?.themeName?.value}
             </strong>
           </li>

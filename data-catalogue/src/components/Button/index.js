@@ -4,12 +4,12 @@ export default function Button(props) {
       href={props.href}
       role="button"
       draggable="false"
-      class="govuk-button govuk-button--start govuk-button--secondary app-masthead__start"
+      className="govuk-button govuk-button--start govuk-button--secondary app-masthead__start"
       data-module="govuk-button"
     >
       {props.text}
       <svg
-        class="govuk-button__start-icon"
+        className="govuk-button__start-icon"
         xmlns="http://www.w3.org/2000/svg"
         width="17.5"
         height="19"
