@@ -45,6 +45,7 @@ RUN yarn install
 # leave this alone please
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY index.html /usr/share/nginx/html/index.html
+COPY index.html /usr/share/nginx/html/styles.css
 EXPOSE 80
 
 # ∑---------------
