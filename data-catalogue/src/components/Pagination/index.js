@@ -30,7 +30,7 @@ export default function Pagination(props) {
           </a>
         </div>
       )}
-      {props.page + 1 < props.totalPages && (
+      {props.page < props.totalPages && (
         <div className="govuk-pagination__next">
           <a
             className="govuk-link govuk-pagination__link"
