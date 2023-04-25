@@ -27,7 +27,7 @@ export default function Navigation(props) {
               data-track-label="https://www.gov.uk"
               data-track-dimension="GOV.UK"
               data-track-dimension-index="29"
-              href="/"
+              href={router.basePath + "/"}
               id="logo"
               title="Go to the GOV.UK homepage"
               data-ga4-link='{"event_name":"navigation","type":"header menu bar","external":"false","text":"GOV.UK","section":"Logo","index":0,"index_total":28}'
