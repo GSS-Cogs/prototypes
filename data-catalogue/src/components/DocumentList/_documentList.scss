@@ -242,3 +242,13 @@
     height: 24px;
     margin-right: govuk-spacing(1);
   }
+
+  .gem-c-document-dropdown__container{
+    padding-top: govuk-spacing(4);
+    border-top: 2px solid $govuk-border-colour;
+
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: flex-start;
+  }

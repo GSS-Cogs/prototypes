@@ -1,13 +1,27 @@
 // @/src/hooks/useDataList.js
 import { useState, useEffect } from "react";
 
-function sortFunction(a, b) {
-  if (a[0] === b[0]) {
-    return 0;
-  } else {
-    return a[0] < b[0] ? -1 : 1;
+const sortByDate = (data) => {
+  console.log(data);
+  if (data === undefined) {
+    return data;
   }
-}
+  return data.sort(function (a, b) {
+    return new Date(b.modified.value) - new Date(a.modified.value);
+  });
+};
+
+const sortByAlphabetical = (data) => {
+  return data.sort(function (a, b) {
+    if (a.name.value < b.name.value) {
+      return -1;
+    }
+    if (a.name.value > b.name.value) {
+      return 1;
+    }
+    return 0;
+  });
+};
 
 const calculateRange = (data, rowsPerPage) => {
   const range = [];
@@ -23,20 +37,23 @@ const sliceData = (data, page, rowsPerPage) => {
   return data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 };
 
-const useDataList = (data, page, rowsPerPage) => {
+const useDataList = (data, page, rowsPerPage, sortBy) => {
+  const [sortedData, setSortedData] = useState([]);
   const [tableRange, setTableRange] = useState([]);
   const [slice, setSlice] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
 
   useEffect(() => {
-    const range = calculateRange(data, rowsPerPage);
-    setTableRange([...range]);
+    if (data !== undefined) {
+      const range = calculateRange(data, rowsPerPage);
+      setTableRange([...range]);
 
-    const slice = sliceData(data, page, rowsPerPage);
-    setSlice([...slice]);
+      const slice = sliceData(data, page, rowsPerPage);
+      setSlice([...slice]);
 
-    setTotalResults(data.length);
-  }, [data, setTableRange, page, setSlice]);
+      setTotalResults(data.length);
+    }
+  }, [data, sortedData, setTableRange, page, setSlice, sortBy]);
 
   return { slice, range: tableRange, totalResults };
 };

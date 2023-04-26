@@ -1,12 +1,26 @@
+import React, { useState } from "react";
+
 import Breadcrumbs from "../components/Breadcrumbs";
 import Search from "@/components/Search";
 import DocumentList from "@/components/DocumentList";
 
 import datasets from "../data/rawData.json";
-import useSortData from "@/hooks/useSortData";
+import useFilterData from "@/hooks/useFilterData";
 
 export default function DatasetList() {
-  const { sortedData } = useSortData(datasets.results.bindings, "date");
+  const [inputText, setInputText] = useState("");
+  const [searchText, setSearchText] = useState("");
+  const data = useFilterData(datasets.results.bindings, searchText);
+
+  const inputHandler = (e) => {
+    const lowerCase = e.target.value.toLowerCase();
+    setInputText(lowerCase);
+  };
+
+  const searchHandler = () => {
+    // this will most likely be replaced once we can call to the api
+    setSearchText(inputText);
+  };
 
   return (
     <div className="govuk-width-container">
@@ -24,10 +38,10 @@ export default function DatasetList() {
             </div>
           </div>
         </div>
-        {/* <Search /> */}
+        <Search inputHandler={inputHandler} searchHandler={searchHandler} />
         <div className="govuk-grid-row">
           <div className="govuk-width-container">
-            <DocumentList items={sortedData} />
+            <DocumentList items={data} searchText={inputText} />
           </div>
           {/* <div className="govuk-grid-column-one-third">
             <h2 className="govuk-heading-m">Refine Results</h2>

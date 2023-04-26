@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useDataList from "@/hooks/useDataList";
+import useSortData from "@/hooks/useSortData";
 
 import { MdRssFeed } from "react-icons/md";
 import Pagination from "../Pagination";
@@ -10,9 +11,9 @@ function DocumentListItem(props) {
       <div className="gem-c-document-list__item-side govuk-grid-column-two-thirds">
         <a
           className="gem-c-document-list__item-title gem-c-document-list__item-title--context govuk-link"
-          href={props.record.value}
+          href={props.record?.value}
         >
-          {props.name.value}
+          {props.name?.value}
         </a>
         <p className="gem-c-document-list__item-description">
           {props?.description?.value.split(".")[0]}
@@ -29,13 +30,13 @@ function DocumentListItem(props) {
             </strong>
           </li>
           <li className="gem-c-document-list__publisher">
-            <time dateTime={props.modified.value}>
+            <time dateTime={props.modified?.value}>
               {props?.creatorName?.value}
             </time>
           </li>
           <li className="gem-c-document-list__attribute">
-            <time dateTime={props.modified.value}>
-              Updated: {formatDate(props.modified.value)}
+            <time dateTime={props.modified?.value}>
+              Updated: {formatDate(props.modified?.value)}
             </time>
           </li>
         </ul>
@@ -58,14 +59,30 @@ function formatDate(date) {
 }
 
 export default function DocumentList(props) {
+  const [sortBy, setSortBy] = useState("date");
+  const sortedData = useSortData(props.items, sortBy, props.searchText);
+
   const [page, setPage] = useState(1);
-  const { slice, range, totalResults } = useDataList(props.items, page, 20);
+  const { slice, range, totalResults } = useDataList(
+    sortedData,
+    page,
+    20,
+    sortBy
+  );
+  // useEffect(() => {
+  //   console.log("sortBy", sortBy);
+  // }, [sortBy, props.items]);
 
   const changePage = (index) => {
     const newPageIndex = page + index;
     if (newPageIndex > 0 && newPageIndex <= range.length) {
       setPage(newPageIndex);
     }
+  };
+
+  const changeSortBy = (e) => {
+    const tempSortBy = e.target.value;
+    setSortBy(tempSortBy);
   };
 
   return (
@@ -86,9 +103,25 @@ export default function DocumentList(props) {
           </a>
         </div>
       </div>
+      <div class="govuk-form-group gem-c-document-dropdown__container">
+        <label class="govuk-label govuk-!-margin-right-3" for="sort">
+          Sort by
+        </label>
+        <select
+          class="govuk-select"
+          id="sort"
+          name="sort"
+          defaultValue={sortBy}
+          onChange={changeSortBy}
+        >
+          <option value="alphabetical">Alphabetical</option>
+          <option value="date">Release Date</option>
+          <option value="relevance">Relevance</option>
+        </select>
+      </div>
       <ul className="gem-c-document-list">
-        {slice.map((item) => {
-          return <DocumentListItem {...item} />;
+        {slice.map((item, index) => {
+          return <DocumentListItem {...item} key={index} />;
         })}
       </ul>
       <Pagination

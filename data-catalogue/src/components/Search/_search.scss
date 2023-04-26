@@ -149,7 +149,7 @@ $large-input-size: 50px;
 
 .gem-c-search__item-wrapper {
   display: table;
-  width: 100%;
+  width: 66%;
   background: govuk-colour("white");
 }
 
@@ -282,7 +282,7 @@ $large-input-size: 50px;
 
   @include govuk-device-pixel-ratio {
     background-size: 52.5px 35px;
-    background-position: 100% 50%;
+    background-position: 66% 50%;
   }
 
   @include govuk-media-query($from: tablet) {

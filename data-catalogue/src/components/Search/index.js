@@ -1,7 +1,13 @@
-export default function Search() {
+export default function Search(props) {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      props.searchHandler();
+    }
+  };
+
   return (
     <div
-      className="gem-c-search govuk-!-display-none-print  gem-c-search--on-white"
+      className="gem-c-search govuk-!-display-none-print gem-c-search--on-white"
       data-module="gem-toggle-input-class-on-focus"
       data-gem-toggle-input-class-on-focus-module-started="true"
     >
@@ -14,6 +20,8 @@ export default function Search() {
           title="Search"
           type="search"
           defaultValue=""
+          onChange={props.inputHandler}
+          onKeyDown={handleKeyDown}
         />
         <div className="gem-c-search__item gem-c-search__submit-wrapper">
           <button
@@ -21,6 +29,7 @@ export default function Search() {
             type="submit"
             data-module="gem-track-click"
             enterKeyHint="search"
+            onClick={props.searchHandler}
           >
             Search
             <svg
