@@ -4,6 +4,7 @@ import useSortData from "@/hooks/useSortData";
 
 import { MdRssFeed } from "react-icons/md";
 import Pagination from "../Pagination";
+import Dropdown from "../Dropdown";
 
 function DocumentListItem(props) {
   return (
@@ -69,9 +70,6 @@ export default function DocumentList(props) {
     20,
     sortBy
   );
-  // useEffect(() => {
-  //   console.log("sortBy", sortBy);
-  // }, [sortBy, props.items]);
 
   const changePage = (index) => {
     const newPageIndex = page + index;
@@ -103,22 +101,15 @@ export default function DocumentList(props) {
           </a>
         </div>
       </div>
-      <div class="govuk-form-group gem-c-document-dropdown__container">
-        <label class="govuk-label govuk-!-margin-right-3" for="sort">
-          Sort by
-        </label>
-        <select
-          class="govuk-select"
-          id="sort"
-          name="sort"
-          defaultValue={sortBy}
-          onChange={changeSortBy}
-        >
-          <option value="alphabetical">Alphabetical</option>
-          <option value="date">Release Date</option>
-          <option value="relevance">Relevance</option>
-        </select>
-      </div>
+      <Dropdown
+        options={[
+          { value: "alphabetical", name: "Alphabetical" },
+          { value: "date", name: "Release Date" },
+          { value: "relevance", name: "Relevance" },
+        ]}
+        onChange={changeSortBy}
+        defaultValue={sortBy}
+      />
       <ul className="gem-c-document-list">
         {slice.map((item, index) => {
           return <DocumentListItem {...item} key={index} />;
