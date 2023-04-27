@@ -8,6 +8,7 @@ import datasets from "../data/rawData.json";
 import useFilterData from "@/hooks/useFilterData";
 
 export default function DatasetList() {
+  const [sortBy, setSortBy] = useState("date");
   const [inputText, setInputText] = useState("");
   const [searchText, setSearchText] = useState("");
   const data = useFilterData(datasets.results.bindings, searchText);
@@ -19,6 +20,7 @@ export default function DatasetList() {
 
   const searchHandler = () => {
     // this will most likely be replaced once we can call to the api
+    setSortBy("relevance");
     setSearchText(inputText);
   };
 
@@ -41,7 +43,12 @@ export default function DatasetList() {
         <Search inputHandler={inputHandler} searchHandler={searchHandler} />
         <div className="govuk-grid-row">
           <div className="govuk-width-container">
-            <DocumentList items={data} searchText={inputText} />
+            <DocumentList
+              items={data}
+              searchText={inputText}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+            />
           </div>
           {/* <div className="govuk-grid-column-one-third">
             <h2 className="govuk-heading-m">Refine Results</h2>

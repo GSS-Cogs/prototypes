@@ -1,4 +1,4 @@
-const Dropdown = ({ options, defaultValue, onChange }) => {
+const Dropdown = ({ options, value, onChange }) => {
   return (
     <div class="govuk-form-group gem-c-document-dropdown__container">
       <label class="govuk-label govuk-!-margin-right-3" for="sort">
@@ -8,7 +8,7 @@ const Dropdown = ({ options, defaultValue, onChange }) => {
         class="govuk-select"
         id="sort"
         name="sort"
-        defaultValue={defaultValue}
+        value={value}
         onChange={onChange}
       >
         {options.map((option) => {

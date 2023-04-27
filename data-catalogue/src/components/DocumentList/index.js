@@ -59,10 +59,8 @@ function formatDate(date) {
     .replace(/( AM| PM)/g, (m) => m.trim().toLowerCase());
 }
 
-export default function DocumentList(props) {
-  const [sortBy, setSortBy] = useState("date");
-  const sortedData = useSortData(props.items, sortBy, props.searchText);
-
+export default function DocumentList({ items, searchText, sortBy, setSortBy }) {
+  const sortedData = useSortData(items, sortBy, searchText);
   const [page, setPage] = useState(1);
   const { slice, range, totalResults } = useDataList(
     sortedData,
@@ -108,7 +106,7 @@ export default function DocumentList(props) {
           { value: "relevance", name: "Relevance" },
         ]}
         onChange={changeSortBy}
-        defaultValue={sortBy}
+        value={sortBy}
       />
       <ul className="gem-c-document-list">
         {slice.map((item, index) => {
