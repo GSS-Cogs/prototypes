@@ -7,6 +7,21 @@ import Pagination from "../Pagination";
 import Dropdown from "../Dropdown";
 
 function DocumentListItem(props) {
+  function makeWordBold(str, word) {
+    var regex = new RegExp(`(${word})`, "gi");
+    var bolded = str.split(regex).map((part, index) => {
+      if (part.toLowerCase() === word.toLowerCase()) {
+        return <b key={index}>{part}</b>;
+      } else {
+        return part;
+      }
+    });
+    return bolded;
+  }
+  const boldedDescription = makeWordBold(
+    props?.description?.value.split(".")[0] + ".",
+    props.searchText
+  );
   return (
     <li className="govuk-grid-row gem-c-document-list__item">
       <div className="gem-c-document-list__item-side govuk-grid-column-two-thirds">
@@ -17,7 +32,7 @@ function DocumentListItem(props) {
           {props.name?.value}
         </a>
         <p className="gem-c-document-list__item-description">
-          {props?.description?.value.split(".")[0]}
+          {boldedDescription}
         </p>
       </div>
       <div className="gem-c-document-list__item-side govuk-grid-column-one-third">
@@ -110,7 +125,9 @@ export default function DocumentList({ items, searchText, sortBy, setSortBy }) {
       />
       <ul className="gem-c-document-list">
         {slice.map((item, index) => {
-          return <DocumentListItem {...item} key={index} />;
+          return (
+            <DocumentListItem {...item} key={index} searchText={searchText} />
+          );
         })}
       </ul>
       <Pagination

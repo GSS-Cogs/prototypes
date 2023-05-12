@@ -45,7 +45,7 @@ export default function DatasetList() {
           <div className="govuk-width-container">
             <DocumentList
               items={data}
-              searchText={inputText}
+              searchText={searchText}
               sortBy={sortBy}
               setSortBy={setSortBy}
             />
