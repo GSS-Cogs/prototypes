@@ -5,13 +5,13 @@ function filterData(objects, searchText) {
 
   for (const obj of objects) {
     // give weight to different parameters
-    const titleScore = obj.name.value
+    const titleScore = obj.title
       .toLowerCase()
       .includes(searchText.toLowerCase())
       ? 2
       : 0;
-    const descriptionScore = obj.description?.value
-      .toLowerCase()
+    const descriptionScore = obj.description
+      ?.toLowerCase()
       .includes(searchText.toLowerCase())
       ? 1
       : 0;

@@ -3,16 +3,16 @@ import { useState, useEffect } from "react";
 const sortByDate = (data) => {
   const tempData = [...data];
   return tempData.sort(function (a, b) {
-    return new Date(b.modified.value) - new Date(a.modified.value);
+    return new Date(b.modified) - new Date(a.modified);
   });
 };
 
 const sortByAlphabetical = (data) => {
   return data.sort(function (a, b) {
-    if (a.name.value < b.name.value) {
+    if (a.title < b.title) {
       return -1;
     }
-    if (a.name.value > b.name.value) {
+    if (a.title > b.title) {
       return 1;
     }
     return 0;

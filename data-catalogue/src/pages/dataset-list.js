@@ -1,17 +1,53 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 import Breadcrumbs from "../components/Breadcrumbs";
 import Search from "@/components/Search";
 import DocumentList from "@/components/DocumentList";
 
-import datasets from "../data/rawData.json";
+// import datasets from "../data/rawData.json";
 import useFilterData from "@/hooks/useFilterData";
 
-export default function DatasetList() {
+import { useLazyQuery, useQuery, gql } from "@apollo/client";
+import client from "../apollo-client";
+
+export async function getServerSideProps({ query }) {
+  const searchText = query.query;
+
+  const { data } = await client.query({
+    query: gql`
+      query textQuery($query_string: String) {
+        endpoint {
+          catalog(id: "http://gss-data.org.uk/catalog/datasets") {
+            catalog_query(search_string: $query_string) {
+              datasets {
+                id
+                title
+                description
+                modified
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: { query_string: searchText },
+  });
+
+  const initData = data.endpoint.catalog.catalog_query.datasets;
+  return {
+    props: {
+      initialDatasets: initData,
+    },
+  };
+}
+
+export default function DatasetList({ initialDatasets }) {
   const [sortBy, setSortBy] = useState("date");
   const [inputText, setInputText] = useState("");
   const [searchText, setSearchText] = useState("");
-  const data = useFilterData(datasets.results.bindings, searchText);
+  const [datasets, setDatasets] = useState(initialDatasets);
+  const router = useRouter();
 
   const inputHandler = (e) => {
     const lowerCase = e.target.value.toLowerCase();
@@ -22,6 +58,7 @@ export default function DatasetList() {
     // this will most likely be replaced once we can call to the api
     setSortBy("relevance");
     setSearchText(inputText);
+    router.push(`/dataset-list?query=${inputText}`);
   };
 
   return (
@@ -44,7 +81,7 @@ export default function DatasetList() {
         <div className="govuk-grid-row">
           <div className="govuk-width-container">
             <DocumentList
-              items={data}
+              items={initialDatasets}
               searchText={searchText}
               sortBy={sortBy}
               setSortBy={setSortBy}

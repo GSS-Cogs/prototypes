@@ -19,7 +19,7 @@ function DocumentListItem(props) {
     return bolded;
   }
   const boldedDescription = makeWordBold(
-    props?.description?.value.split(".")[0] + ".",
+    props?.description?.split(".")[0] + ".",
     props.searchText
   );
   return (
@@ -27,9 +27,9 @@ function DocumentListItem(props) {
       <div className="gem-c-document-list__item-side govuk-grid-column-two-thirds">
         <a
           className="gem-c-document-list__item-title gem-c-document-list__item-title--context govuk-link"
-          href={props.record?.value}
+          href={props.id}
         >
-          {props.name?.value}
+          {props.title}
         </a>
         <p className="gem-c-document-list__item-description">
           {boldedDescription}
@@ -42,17 +42,15 @@ function DocumentListItem(props) {
         >
           <li className="gem-c-document-list__tag-outer">
             <strong className="gem-c-document-list__tag-inner govuk-tag--blue">
-              {props?.themeName?.value}
+              {props?.theme}
             </strong>
           </li>
           <li className="gem-c-document-list__publisher">
-            <time dateTime={props.modified?.value}>
-              {props?.creatorName?.value}
-            </time>
+            <time dateTime={props.modified}>{props?.creator}</time>
           </li>
           <li className="gem-c-document-list__attribute">
-            <time dateTime={props.modified?.value}>
-              Updated: {formatDate(props.modified?.value)}
+            <time dateTime={props.modified}>
+              Updated: {formatDate(props.modified)}
             </time>
           </li>
         </ul>
