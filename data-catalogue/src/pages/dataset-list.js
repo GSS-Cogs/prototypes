@@ -46,7 +46,7 @@ export default function DatasetList({ initialDatasets }) {
   const [sortBy, setSortBy] = useState("date");
   const [inputText, setInputText] = useState("");
   const [searchText, setSearchText] = useState("");
-  const [datasets, setDatasets] = useState(initialDatasets);
+  const data = useFilterData(initialDatasets, searchText);
   const router = useRouter();
 
   const inputHandler = (e) => {
@@ -81,7 +81,7 @@ export default function DatasetList({ initialDatasets }) {
         <div className="govuk-grid-row">
           <div className="govuk-width-container">
             <DocumentList
-              items={initialDatasets}
+              items={data}
               searchText={searchText}
               sortBy={sortBy}
               setSortBy={setSortBy}

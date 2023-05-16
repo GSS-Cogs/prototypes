@@ -18,10 +18,9 @@ function DocumentListItem(props) {
     });
     return bolded;
   }
-  const boldedDescription = makeWordBold(
-    props?.description?.split(".")[0] + ".",
-    props.searchText
-  );
+  const boldedDescription =
+    props?.description &&
+    makeWordBold(props?.description?.split(".")[0] + ".", props.searchText);
   return (
     <li className="govuk-grid-row gem-c-document-list__item">
       <div className="gem-c-document-list__item-side govuk-grid-column-two-thirds">
