@@ -1,10 +1,8 @@
 import Button from "../Button";
-import { useRouter } from 'next/router';
-
-
+import { useRouter } from "next/router";
 
 export default function Masthead(props) {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <div className="app-masthead" style={{ "--masthead-colour": props.colour }}>
       <div className="govuk-width-container">
@@ -20,7 +18,14 @@ export default function Masthead(props) {
             {props.children}
           </div>
         </div>
+
         <Button text="Explore data" href={router.basePath + "/dataset-list"} />
+        <div>
+          <Button
+            text="Explore json data"
+            href={router.basePath + "/dataset-list-json"}
+          />
+        </div>
       </div>
     </div>
   );
